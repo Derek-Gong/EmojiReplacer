@@ -22,7 +22,8 @@ using Microsoft.ProjectOxford.Face;
 using Microsoft.ProjectOxford.Face.Contract;
 using Microsoft.ProjectOxford.Vision;
 using VideoFrameAnalyzer;
-
+using System.IO;
+using Microsoft.ProjectOxford.Common.Contract;
 
 namespace EmojiReplacer
 {
@@ -62,7 +63,7 @@ namespace EmojiReplacer
         public int[] res = null;
         public FaceAnalyzer()
         {
-            //_emotionClient = new EmotionServiceClient("<subscription key>");
+            _emotionClient = new EmotionServiceClient("60d3219c11f04f06ac8e91dcd2657abd");
             //_grabber.AnalysisFunction = Detector;
             //_grabber.NewResultAvailable += (s, e) =>
             //{
@@ -112,8 +113,24 @@ namespace EmojiReplacer
             //    //);
             //};
         }
-        public void Start()
-        { }
+        public async Task<VideoAggregateRecognitionResult> Analyze(Stream fs)
+        {
+            var videoOperation = await _emotionClient.RecognizeInVideoAsync(fs);
+            VideoOperationResult operationResult = null;
+            while (true)
+            {
+                operationResult = await _emotionClient.GetOperationResultAsync(videoOperation);
+                if (operationResult.Status == VideoOperationStatus.Succeeded || operationResult.Status == VideoOperationStatus.Failed)
+                {
+                    break;
+                }
+                
+                Task.Delay(3000).Wait();
+            }
+            var emotionRecognitionJsonString = ((VideoOperationInfoResult<VideoAggregateRecognitionResult>)operationResult).ProcessingResult;
+            //var emotionRecognitionTracking = JsonConvert.DeserializeObject<EmotionRecognitionResult>(emotionRecognitionTrackingResultJsonString, settings);
+            return emotionRecognitionJsonString;
+        }
         public int[] Analyzer(Emotion[] emotions)
         {
             int[] res = null;
