@@ -5,8 +5,73 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmojiReplacer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="489" Width="858">
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel HorizontalAlignment="Center" Margin="20">
+            <Border BorderThickness="3" Background="Black">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="0" Color="White"/>
+                        <GradientStop Offset="0.5" Color="Gold"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <MediaElement Height="300" Width="450" Name="In_mediaElement" 
+                       LoadedBehavior="Manual" 
+                              Volume="{Binding ElementName=volumeSlider, Path=Value}"
+                       MouseLeftButtonUp="mediaElement_MouseLeftButtonUp"/>
+            </Border>
+            <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Center">
+                <Button x:Name="openBtn" Content="Open File" 
+                 Style="{StaticResource btnStyle}" Click="openBtn_Click"/>
+                <Button x:Name="playBtn" Content="Play" 
+                 Style="{StaticResource btnStyle}" Click="playBtn_Click"/>
+                <Button x:Name="stopBtn" Content="Stop" 
+                 Style="{StaticResource btnStyle}" Click="stopBtn_Click"/>
+                <Button x:Name="backBtn" Content="Back" 
+                 Style="{StaticResource btnStyle}" Click="backBtn_Click"/>
+                <Button x:Name="forwardBtn" Content="Forward" 
+                 Style="{StaticResource btnStyle}" Click="forwardBtn_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                <TextBlock Text="Volume" Foreground="Gold"/>
+                <Slider x:Name="volumeSlider" Minimum="0" Maximum="1" Value="0.5" Width="200" ValueChanged="volumeSlider_ValueChanged"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" Margin="20">
+            <Border BorderThickness="3" Background="Black">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="0" Color="White"/>
+                        <GradientStop Offset="0.5" Color="Gold"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <MediaElement Height="300" Width="450" Name="Out_mediaElement" 
+                      Volume="0.5" LoadedBehavior="Manual" 
+                      />
+            </Border>
+        </StackPanel>
+    </StackPanel>
+    
+    <Window.Resources>
+        <Style x:Key="btnStyle" TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="0" Color="White"/>
+                        <GradientStop Offset="0.5" Color="#FF554D4A"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Foreground" Value="Gold"/>
+            <Style.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
 </Window>
+    
