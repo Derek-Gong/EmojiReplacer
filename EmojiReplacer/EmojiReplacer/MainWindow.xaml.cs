@@ -43,26 +43,7 @@ namespace EmojiReplacer
                 In_mediaElement.Source = new Uri(openfile.FileName, UriKind.Absolute);
                 playBtn.IsEnabled = true;
             }
-            //openfile.Filter = "视频|*.mp4";
-           
             
-
-            /*
-               ShellContainer selectedFolder = null;
-               selectedFolder = KnownFolders.SampleVideos as ShellContainer;
-               CommonOpenFileDialog cfd = new Microsoft.WindowsAPICodePack.Dialogs.CommonOpenFileDialog();
-               cfd.InitialDirectoryShellContainer = selectedFolder;
-               cfd.EnsureReadOnly = true;
-               cfd.Filters.Add(new Microsoft.WindowsAPICodePack.Dialogs.CommonFileDialogFilter("WMV Files", "*.wmv"));
-               cfd.Filters.Add(new CommonFileDialogFilter("AVI Files", "*.avi")); 
-               cfd.Filters.Add(new CommonFileDialogFilter("MP3 Files", "*.mp3"));
-
-               if (cfd.ShowDialog() == CommonFileDialogResult.Ok)
-               {
-                   In_mediaElement.Source = new Uri(cfd.FileName, UriKind.Relative);
-                   playBtn.IsEnabled = true;
-               }
-               */
         }
 
         private void PlayerPause()
