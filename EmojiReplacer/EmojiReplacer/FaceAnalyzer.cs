@@ -114,12 +114,13 @@ namespace EmojiReplacer
         }
         public void Start()
         { }
-        private void Analyzer()
+        public int[] Analyzer(Emotion[] emotions)
         {
+            int[] res = null;
             res = _similarVector.Select(x=>-1).ToArray();
-            for (int i=0;i<latestResultsToDisplay.Length;i++)
+            for (int i=0;i<emotions.Length;i++)
             {
-                var emotion = latestResultsToDisplay[i];
+                var emotion = emotions[i];
                 double[] tmp = new double[]
                 {
                     emotion.Scores.Anger,
@@ -158,7 +159,7 @@ namespace EmojiReplacer
                         res[i] = k;
                 }
             }
-
+            return res;
         }
 
         public Emotion[] Detector(VideoFrame frame)
