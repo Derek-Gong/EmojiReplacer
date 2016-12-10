@@ -81,6 +81,7 @@ namespace EmojiReplacer
         private void stopBtn_Click(object sender, RoutedEventArgs e)
         {
             In_mediaElement.Stop();
+            PlayerPause();
         }
 
         private void backBtn_Click(object sender, RoutedEventArgs e)

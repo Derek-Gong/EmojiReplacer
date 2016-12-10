@@ -47,6 +47,12 @@
     <Reference Include="Microsoft.ProjectOxford.Vision">
       <HintPath>..\..\..\Cognitive-Samples-VideoFrameAnalysis\Windows\LiveCameraSample\bin\Debug\Microsoft.ProjectOxford.Vision.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>C:\Users\Xmagicer\Downloads\Compressed\Windows API Code Pack 1.1\Windows API Code Pack 1.1\binaries\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>C:\Users\Xmagicer\Downloads\Compressed\Windows API Code Pack 1.1\Windows API Code Pack 1.1\binaries\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\Cognitive-Samples-VideoFrameAnalysis\Windows\VideoFrameAnalyzer\bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -64,6 +70,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
