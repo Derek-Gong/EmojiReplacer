@@ -70,6 +70,7 @@ namespace EmojiReplacer
                 Mat now =new Mat("C:\\Users\\Xmagicer\\Desktop\\hacka.jpg");
                 //byte img = new byte();
               //  now = Mat.FromImageData(In_mediaElement.Source.ToString, ImreadModes.Color);
+
                 VideoFrameMetadata data ;
                 data.Index = 0;
                 data.Timestamp = DateTime.Now;
