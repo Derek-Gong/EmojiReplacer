@@ -1,4 +1,5 @@
 ﻿
+using OpenCvSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VideoFrameAnalyzer;
 //using OpenCvSharp;
 
 namespace EmojiReplacer
@@ -22,7 +24,7 @@ namespace EmojiReplacer
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : System.Windows.Window
     {
         //Button openBtn, playBtn, stopBtn, backBtn, forwardBtn;
        // MediaElement mediaElement_MouseLeftButtonUp;
@@ -50,6 +52,14 @@ namespace EmojiReplacer
             //SetPlayer(true);
             if (playBtn.Content.ToString() == "Play")
             {
+                Mat img = new Mat();
+                VideoFrameMetadata data;
+                data.Index = 0;
+                data.Timestamp = DateTime.Now;
+                VideoFrame frame = new VideoFrame(img, data);
+                FaceAnalyzer face = new FaceAnalyzer();
+                face.Detector(frame);
+                
                 In_mediaElement.Play();
                 playBtn.Content = "Pause";
                 In_mediaElement.ToolTip = "Click to Pause";
