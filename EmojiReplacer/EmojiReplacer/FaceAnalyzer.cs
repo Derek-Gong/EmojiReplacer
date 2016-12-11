@@ -29,9 +29,11 @@ namespace EmojiReplacer
 {
     class FaceAnalyzer
     {
+        public Queue<Emotion[]> EmotionQueue = new Queue<Emotion[]>();
         private EmotionServiceClient _emotionClient = null;
         private FrameGrabber<Emotion[]> _grabber = new FrameGrabber<Emotion[]>();
         public Emotion[] latestResultsToDisplay;
+        private Queue<EmotionServiceClient> Clients = new Queue<EmotionServiceClient>();
         private double[][] _similarVector = new double[][] 
         {
             new double[]{1.35727838e-08,1.35727838e-08,1.35727838e-08,1.35727838e-08,1.35727838e-08,1.35727838e-08,1.35727838e-08,1.35727838e-08},
@@ -64,6 +66,12 @@ namespace EmojiReplacer
         public FaceAnalyzer()
         {
             _emotionClient = new EmotionServiceClient("60d3219c11f04f06ac8e91dcd2657abd");
+            Clients.Enqueue(new EmotionServiceClient("60d3219c11f04f06ac8e91dcd2657abd"));
+            Clients.Enqueue(new EmotionServiceClient("60d3219c11f04f06ac8e91dcd2657abd"));
+            Clients.Enqueue(new EmotionServiceClient("60d3219c11f04f06ac8e91dcd2657abd"));
+            Clients.Enqueue(new EmotionServiceClient("60d3219c11f04f06ac8e91dcd2657abd"));
+            Clients.Enqueue(new EmotionServiceClient("60d3219c11f04f06ac8e91dcd2657abd"));
+
             //_grabber.AnalysisFunction = Detector;
             //_grabber.NewResultAvailable += (s, e) =>
             //{
@@ -187,13 +195,17 @@ namespace EmojiReplacer
 
             return emotions.Result;
         }
-        //private async Task<Emotion[]> Detector(VideoFrame frame)
-        //{
-        //    var jpg = frame.Image.ToMemoryStream(".jpg");
-        //    // Submit image to API. 
-        //    Emotion[] emotions = null;
-        //    emotions = await _emotionClient.RecognizeAsync(jpg);
-        //    return emotions;
-        //}
+        private async void DetectorAsync(VideoFrame frame)
+        {
+            var jpg = frame.Image.ToMemoryStream(".jpg");
+            // Submit image to API. 
+            Emotion[] emotions = null;
+            var client = Clients.Dequeue();
+            emotions = await client.RecognizeAsync(jpg);
+            Clients.Enqueue(client);
+            lock(EmotionQueue)
+                EmotionQueue.Enqueue(emotions);
+            
+        }
     }
 }
