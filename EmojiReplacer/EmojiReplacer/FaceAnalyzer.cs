@@ -185,7 +185,7 @@ namespace EmojiReplacer
                 }
             }
             return res;
-        }
+        } 
 
         public Emotion[] Detector(VideoFrame frame)
         {
