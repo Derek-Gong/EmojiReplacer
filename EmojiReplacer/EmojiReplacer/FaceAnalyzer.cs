@@ -192,6 +192,7 @@ namespace EmojiReplacer
             var jpg = frame.Image.ToMemoryStream(".jpg");
             // Submit image to API. 
             var emotions = _emotionClient.RecognizeAsync(jpg);
+
             return emotions.Result;
         }
         private async void DetectorAsync(VideoFrame frame)
